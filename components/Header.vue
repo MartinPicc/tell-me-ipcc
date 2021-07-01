@@ -5,7 +5,7 @@
             <div id="typewriter-effect-container" class="flex justify-end leading-relaxed md:leading-relaxed text-3xl md:text-6xl overflow-hidden">
                 <p class="cursor whitespace-nowrap flex-grow">{{ text }}</p>
             </div>
-            <p class="md:text-2xl text-xl font-bold">A semantic search engine to browse IPCC's report on climate change.</p>
+            <p class="md:text-2xl text-xl font-bold">A semantic search engine to browse IPCC's report on climate change</p>
         </div>
     </div>
 </template>
