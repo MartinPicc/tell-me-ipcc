@@ -44,9 +44,6 @@ export default {
   ],
 
   http: {
-    proxyHeaders: false,
-    https: true,
-    baseURL: ''
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
