@@ -54,7 +54,7 @@ export default {
     API_HOST: 'localhost',
     API_PORT: 5000,
     N_ANSWERS: 5,
-    PDF_NAME: 'SR15_Full_Report_Low_Res.pdf'
+    PDF_URL: 'https://storage.googleapis.com/nlp-se/SR15_Full_Report_Low_Res.pdf'
   },
 
   router: { base: '/tell-me-ipcc/' }
