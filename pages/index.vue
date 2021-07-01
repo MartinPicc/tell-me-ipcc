@@ -70,15 +70,8 @@ export default {
             this.is_loading = true;
             this.query_ = this.query;
 
-            const body = {
-                query: this.query,
-                n: process.env.N_ANSWERS,
-                offset: 0
-            }
-            this.answers = await this.$http.$post('/api/search/', body);
-
-            // const url = `/api/search/?query=${encodeURI(this.query)}&n=${process.env.N_ANSWERS}&offset=0`;
-            // this.answers = await this.$http.$get(url);
+            const url = `/api/search/?query=${encodeURI(this.query)}&n=${process.env.N_ANSWERS}&offset=0`;
+            this.answers = await this.$http.$get(url);
             
             // var example = {
             //     'text': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras auctor sapien non neque semper dictum. Cras sed lectus tellus. Fusce maximus est mi, vel posuere lorem condimentum ut. Nam commodo massa id ante molestie, vitae iaculis enim accumsan. Maecenas ac odio pellentesque, mattis nunc nec, dictum enim. Nunc ligula lorem, dictum id elementum id, suscipit eget arcu. Nullam eget ante sit amet erat facilisis pretium eu in turpis. Cras rhoncus non ipsum ut lacinia. Proin facilisis odio ac mattis tincidunt. Phasellus risus metus, consectetur et lorem at, malesuada luctus velit. Maecenas quis lacus id mauris tincidunt vehicula. Cras bibendum eu nisl vitae euismod.',
@@ -99,16 +92,9 @@ export default {
                 return;
             }
             this.is_loading = true;
-            // const offset = this.answers.length;
-            // const url = `/api/search/?query=${encodeURI(this.query_)}&n=${process.env.N_ANSWERS}&offset=${offset}`;
-            // this.answers = this.answers.concat(await this.$http.$get(url));
-            
-            const body = {
-                query: this.query_,
-                n: process.env.N_ANSWERS,
-                offset: this.answers.length
-            }
-            this.answers = this.answers.concat(await this.$http.$post('/api/search/', body));
+            const offset = this.answers.length;
+            const url = `/api/search/?query=${encodeURI(this.query_)}&n=${process.env.N_ANSWERS}&offset=${offset}`;
+            this.answers = this.answers.concat(await this.$http.$get(url));
 
             this.is_loading = false;
         },
