@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/", (function(a){return {data:[{answers:{},query:a,query_:a,is_loading:false}],fetch:{},mutations:void 0}}("")));
