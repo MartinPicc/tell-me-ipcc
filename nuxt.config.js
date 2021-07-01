@@ -49,8 +49,8 @@ export default {
   },
 
   proxy: {
-    // '/api/': { target: 'https://nlp-processor-qmqkjt2alq-ey.a.run.app/', pathRewrite: {'^/api/': ''} }
-    '/api/': { target: 'http://localhost/', pathRewrite: {'^/api/': ''} }
+    '/api/': { target: 'https://nlp-processor-qmqkjt2alq-ey.a.run.app/', pathRewrite: {'^/api/': ''} }
+    // '/api/': { target: 'http://localhost/', pathRewrite: {'^/api/': ''} }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
