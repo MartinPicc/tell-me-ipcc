@@ -40,7 +40,7 @@ export default {
                     + this.text.slice(this.answer_end_ix));
         },
         link_to_pdf() {
-            return `/${process.env.PDF_NAME}#page=${this.page_}`;
+            return `${process.env.PDF_URL}#page=${this.page_}`;
         },
         page_() {
             return parseInt(this.page) + 1

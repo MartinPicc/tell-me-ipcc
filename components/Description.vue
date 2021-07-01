@@ -19,7 +19,7 @@
 export default {
     computed: {
         link_to_pdf() {
-            return `/${process.env.PDF_NAME}`;
+            return `${process.env.PDF_URL}`;
         },
     }
 }
