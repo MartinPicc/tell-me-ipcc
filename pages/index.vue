@@ -92,7 +92,7 @@ export default {
             }
             this.is_loading = true;
             const offset = this.answers.length;
-            const url = `/api/search/?query=${encodeURI(this.query_)}&n=${process.env.N_ANSWERS}&offset=${offset}`;
+            const url = `https://nlp-processor-qmqkjt2alq-ey.a.run.app/search?query=${encodeURI(this.query_)}&n=${process.env.N_ANSWERS}&offset=${offset}`;
             this.answers = this.answers.concat(await this.$http.$get(url));
 
             this.is_loading = false;
