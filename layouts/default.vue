@@ -11,7 +11,7 @@
       <a class="text-gray-600" href="https://huggingface.co/" target="_blank">Hugging Face's transformers</a>,
       <a class="text-gray-600" href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a> and
       <a class="text-gray-600" href="https://nuxtjs.org/" target="_blank">Nuxt.js</a><br>
-      <b>Disclaimer: this application is a prototype and is not endorsed by IPCC anyhow.</b>
+      <b>Disclaimer: this application is a prototype and is not endorsed by IPCC anyhow</b>
     </footer>
   </div>
 </template>
