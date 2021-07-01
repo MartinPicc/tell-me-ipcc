@@ -29,7 +29,6 @@
                     :page="answer.page"
                     :answer_start_ix="answer.answer_start_ix"
                     :answer_end_ix="answer.answer_end_ix"
-                    @feedback="saveFeedback"
                 />
             </ul>
             <div class="text-center">
@@ -70,7 +69,7 @@ export default {
             this.is_loading = true;
             this.query_ = this.query;
 
-            const url = `/api/search/?query=${encodeURI(this.query)}&n=${process.env.N_ANSWERS}&offset=0`;
+            const url = `https://nlp-processor-qmqkjt2alq-ey.a.run.app/search/?query=${encodeURI(this.query)}&n=${process.env.N_ANSWERS}&offset=0`;
             this.answers = await this.$http.$get(url);
             
             // var example = {
