@@ -69,8 +69,8 @@ export default {
             this.is_loading = true;
             this.query_ = this.query;
 
-            // const url = `https://nlp-processor-qmqkjt2alq-ey.a.run.app/search/?query=${encodeURI(this.query)}&n=${process.env.N_ANSWERS}&offset=0`;
-            const url = 'https://api.nuxtjs.dev/mountains';
+            const url = `https://nlp-processor-qmqkjt2alq-ey.a.run.app/search?query=${encodeURI(this.query)}&n=${process.env.N_ANSWERS}&offset=0`;
+            // const url = 'https://api.nuxtjs.dev/mountains';
             this.answers = await this.$http.$get(url);
             
             // var example = {
