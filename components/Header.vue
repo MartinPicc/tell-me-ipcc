@@ -1,11 +1,11 @@
 <template>
-    <div class="bg-background-img bg-center">
+    <div class="bg-background-img bg-center bg-cover font-mono">
         <div class="content pt-8 pb-10 md:pb-16 space-y-2">
             <h1 class="md:text-8xl text-5xl">Tell me IPCC,</h1>
             <div id="typewriter-effect-container" class="flex justify-end leading-relaxed md:leading-relaxed text-3xl md:text-6xl overflow-hidden">
                 <p class="cursor whitespace-nowrap flex-grow">{{ text }}</p>
             </div>
-            <p class="md:text-2xl text-md font-bold">A semantic search engine to browse IPCC's report on climate change.</p>
+            <p class="md:text-2xl text-xl font-bold">A semantic search engine to browse IPCC's report on climate change.</p>
         </div>
     </div>
 </template>
@@ -23,7 +23,10 @@ export default {
             text: '',
             textArray: [
                 'What is climate change?',
-                'What is the impact of climate change on sea level?'
+                'How can we mitigate climate change?',
+                'What is the impact of climate change on sea level?',
+                'What are the causes of climate change?',
+                'What is the impact of human activities on CO2 concentration?'
             ],
             text_ix: 0
         }

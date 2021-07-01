@@ -2,7 +2,7 @@
     <div>
         <Header />
         <div class="content relative md:-top-9 -top-5">            
-            <div class="query-container w-full flex bg-white rounded-full shadow-md py-2 px-3 space-x-2 md:py-4 md:px-6 md:space-x-4">
+            <div class="query-container w-full flex bg-white rounded-full shadow-md py-2 px-3 space-x-2 md:py-4 md:px-6 md:space-x-4 mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8 text-gray-400 mt-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -19,8 +19,8 @@
                     </svg>
                 </button>
             </div>
-            <Description v-if="!answers.length" />
-            <ul class="md:mx-6 my-8">
+            <Description v-if="!answers.length && !is_loading" />
+            <ul class="md:mx-6" v-if="answers.length">
                 <QueryResult 
                     v-for="answer in answers" 
                     :key="answer.text"
@@ -39,6 +39,7 @@
                     class="bg-gray-500 text-white py-1 px-3 rounded-full shadow hover:shadow-md"
                 >Load more answers</button>
             </div>
+            <Loader v-if="is_loading"/>
         </div>
     </div>
 </template>
@@ -47,22 +48,37 @@
 import QueryResult from '~/components/QueryResult.vue'
 import Header from '~/components/Header.vue'
 import Description from '~/components/Description.vue'
+import Loader from '~/components/Loader.vue'
 
 export default {
     components: {
-        Header, QueryResult, Description
+        Header, QueryResult, Description, Loader
     },
     async asyncData() {
-        const answers = {};
-        const query = '';
-        const query_ = '';
-        return { answers, query, query_ };
+        var answers = {};
+        var query = '';
+        var query_ = '';
+        var is_loading = false;
+        return { answers, query, query_, is_loading };
     },
     methods: {
         async getAnswers() {
+            if ( '' === this.query ) {
+                return;
+            }
+            this.answers = {};
+            this.is_loading = true;
             this.query_ = this.query;
-            const url = `/api/search/?query=${encodeURI(this.query)}&n=${process.env.N_ANSWERS}&offset=0`;
-            this.answers = await this.$http.$get(url);
+
+            const body = {
+                query: this.query,
+                n: process.env.N_ANSWERS,
+                offset: 0
+            }
+            this.answers = await this.$http.$post('/api/search/', body);
+
+            // const url = `/api/search/?query=${encodeURI(this.query)}&n=${process.env.N_ANSWERS}&offset=0`;
+            // this.answers = await this.$http.$get(url);
             
             // var example = {
             //     'text': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras auctor sapien non neque semper dictum. Cras sed lectus tellus. Fusce maximus est mi, vel posuere lorem condimentum ut. Nam commodo massa id ante molestie, vitae iaculis enim accumsan. Maecenas ac odio pellentesque, mattis nunc nec, dictum enim. Nunc ligula lorem, dictum id elementum id, suscipit eget arcu. Nullam eget ante sit amet erat facilisis pretium eu in turpis. Cras rhoncus non ipsum ut lacinia. Proin facilisis odio ac mattis tincidunt. Phasellus risus metus, consectetur et lorem at, malesuada luctus velit. Maecenas quis lacus id mauris tincidunt vehicula. Cras bibendum eu nisl vitae euismod.',
@@ -75,14 +91,26 @@ export default {
             // for (var i = 0; i < 10; i++) {
             //     this.answers.push(example);
             // }
+
+            this.is_loading = false;
         },
         async loadMoreAnswers() {
             if ( '' === this.query_ ) {
                 return;
             }
-            const offset = this.answers.length;
-            const url = `/api/search/?query=${encodeURI(this.query_)}&n=${process.env.N_ANSWERS}&offset=${offset}`;
-            this.answers = this.answers.concat(await this.$http.$get(url));
+            this.is_loading = true;
+            // const offset = this.answers.length;
+            // const url = `/api/search/?query=${encodeURI(this.query_)}&n=${process.env.N_ANSWERS}&offset=${offset}`;
+            // this.answers = this.answers.concat(await this.$http.$get(url));
+            
+            const body = {
+                query: this.query_,
+                n: process.env.N_ANSWERS,
+                offset: this.answers.length
+            }
+            this.answers = this.answers.concat(await this.$http.$post('/api/search/', body));
+
+            this.is_loading = false;
         },
         async is_nlp_processor_running() {
             this.nlp_processor_running = await this.$http.$get('/api/nlp-processor-running');
@@ -92,9 +120,6 @@ export default {
         link_to_pdf() {
             return `/${process.env.PDF_NAME}`;
         },
-    },
-    mounted() {
-        this.answers = this.$http.$post('/api/start/');
     }
 }
 </script>
