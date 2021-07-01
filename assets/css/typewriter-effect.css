@@ -1,0 +1,28 @@
+/* for the typewriter effect */
+.cursor::after {
+  content: "";
+  display: inline-block;
+  margin-left: 3px;
+  margin-bottom: -1%;
+  background-color: black;
+  animation-name: blink;
+  animation-duration: 0.7s;
+  animation-iteration-count: infinite;
+  height:80%;
+  width:3px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

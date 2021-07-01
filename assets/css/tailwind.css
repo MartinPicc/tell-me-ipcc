@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content {
+    @apply container mx-auto md:px-6 px-3;
+    max-width: 1000px;
+}
+a {
+    @apply underline text-blue-700;
+}
+.align-sub {
+    vertical-align: sub;
+}
